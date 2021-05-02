@@ -1,6 +1,6 @@
 Package: scarHRD
 Type: Package
-Title: Estimating Genomic scars signatures (LST, TAI,LOH)
+Title: Estimating Genomic Scars Signatures (LST, TAI, LOH)
 Version: 0.1.1
 Author: Zsofia Sztupinszki, Nicolai Birkbak
 Maintainer: Zsofia Sztupinszki <zsofia.sztupinszki@childrens.harvard.edu>

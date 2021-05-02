@@ -21,7 +21,7 @@ scarHRD R package Manual
 Introduction
 ============
 
-`scarHRD` is an R package which determines the levels of homologous recombination deficiency (telomeric allelic imbalance, loss off heterozygosity, number of large-scale transitions) based on NGS (WES, WGS) data.
+`scarHRD` is an R package which determines the levels of homologous recombination deficiency (telomeric allelic imbalance, loss of heterozygosity, number of large-scale transitions) based on NGS (WES, WGS) data.
 
 The first genomic scar based homologous recombination deficiency measures were produced using SNP arrays. Since this technology has been largely replaced by next generation sequencing it has become important to develop algorithms that derive the same type of genomic scar-scores from next generation sequencing (WXS, WGS) data. In order to perform this analysis, here **we introduce the `scarHRD` R package** and show that using this method the **SNP-array based and next generation sequencing based derivation of HRD scores show good correlation.**
 

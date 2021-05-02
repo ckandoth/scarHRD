@@ -55,22 +55,20 @@ scar_score<-function(seg,reference = "grch38", chr.in.names=TRUE, m,seqz=FALSE, 
   #Calculating the hrd score:
   res_hrd <- calc.hrd(seg,sizelimit1=sizelimitLOH)
   #Calculating the telomeric allelic imbalance score:
-  res_ai<- calc.ai_new(seg = seg, chrominfo = chrominfo) #<-- the first column is what I need
+  res_ai<- calc.ai_new(seg = seg, chrominfo = chrominfo)[,1] #<-- the first column is what I need
   #Calculating the large scale transition scores:
   res_lst <- calc.lst(seg = seg, chrominfo = chrominfo) #<-- You need to use the chrominfo.snp6 file! Nicolai sent it to you!
-  sum_HRD0<-res_lst+res_hrd+res_ai[1]
+  sum_HRD0<-res_lst+res_hrd+res_ai
 
   if (is.null(ploidy)){
     sum_HRDc<-NA
   } else {
-    sum_HRDc<-res_lst-15.5*ploidy+res_hrd+res_ai[1]
+    sum_HRDc<-res_lst-15.5*ploidy+res_hrd+res_ai
   }
 
-  #HRDresulst<-c(res_hrd,res_ai,res_lst,sum_HRD0,sum_HRDc)
-  #names(HRDresulst)<-c("HRD",colnames(res_ai),"LST", "HRD-sum","adjusted-HRDsum")
-  HRDresulst<-c(res_hrd,res_ai[1],res_lst,sum_HRD0)
-  names(HRDresulst)<-c("HRD",colnames(res_ai)[1],"LST", "HRD-sum")
-  run_name<-names(sum_HRD0)
-  write.table(t(HRDresulst),paste0(outputdir,"/",run_name,"_HRDresults.txt"),col.names=NA,sep="\t",row.names=unique(seg[,1]))
-  return(t(HRDresulst))
+  HRDresults<-cbind(res_hrd,res_ai,res_lst,sum_HRD0)
+  colnames(HRDresults)<-c("LOH", "tAI", "LST", "HRD")
+  run_name<-names(sum_HRD0)[0]
+  write.table(HRDresults, file=paste0(outputdir,"/",run_name,"hrd.txt"), quote=FALSE, sep="\t", col.names=NA)
+  return(HRDresults)
 }
